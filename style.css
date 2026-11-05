@@ -286,15 +286,23 @@ button { cursor: pointer; }
   box-shadow: 0 22px 52px rgba(95, 79, 67, 0.11);
 }
 .gift-image {
-  aspect-ratio: 1.45;
-  background: #efe7da;
+  /* A mesma área para fotos horizontais, verticais e quadradas. */
+  position: relative;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-bottom: 1px solid rgba(220, 206, 177, 0.5);
+  background: linear-gradient(155deg, #fffdfa 0%, #f6f1e9 100%);
+  border-bottom: 1px solid rgba(220, 206, 177, 0.58);
 }
 .gift-image img {
+  /* A foto inteira fica visível; sobras formam uma moldura clara. */
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  padding: 16px;
+  object-fit: contain;
+  object-position: center;
 }
 .gift-card-body {
   display: flex;
@@ -584,19 +592,31 @@ button { cursor: pointer; }
 .field-wide { grid-column: 1 / -1; }
 .field textarea { resize: vertical; }
 .image-preview-wrap {
+  /* A prévia do cadastro também nunca corta a imagem. */
+  position: relative;
   width: min(360px, 100%);
-  aspect-ratio: 1.65;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   margin-top: 12px;
   border-radius: 16px;
   border: 1px solid var(--line);
-  background: #f3ede1;
+  background: #fffdfa;
 }
-.image-preview-wrap img,
-.managed-thumb {
+.image-preview-wrap img {
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  padding: 12px;
+  object-fit: contain;
+  object-position: center;
+}
+.managed-thumb {
+  object-fit: contain;
+  object-position: center;
+  padding: 6px;
+  border: 1px solid var(--line);
 }
 .toggle-label {
   display: flex;
@@ -632,7 +652,7 @@ button { cursor: pointer; }
   height: 78px;
   flex-shrink: 0;
   border-radius: 14px;
-  background: #efe7da;
+  background: #fffdfa;
 }
 .managed-detail { flex: 1; min-width: 0; }
 .managed-detail h3 {
@@ -684,6 +704,7 @@ button { cursor: pointer; }
   .gifts-section { padding-block: 40px 70px; }
   .gifts-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .gift-card h3 { font-size: 24px; }
+  .gift-image img { padding: 14px; }
   .admin-main { padding-top: 22px; }
   .admin-panel,
   .dialog-content { padding: 20px; }
