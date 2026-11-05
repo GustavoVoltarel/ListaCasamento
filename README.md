@@ -88,3 +88,17 @@ O GitHub Pages é só a hospedagem. Imagens e presentes são mantidos no Supabas
 - Mude o nome do casal e o texto de boas-vindas em `config.js`.
 - Edite a paleta de cores no início de `style.css` (`--blush`, `--blush-dark`, etc.).
 - No painel, você pode cadastrar presentes divertidos como nos prints, cada um com sua própria imagem, nome e valor.
+
+## Imagens padronizadas (atualização de 05/11/2026)
+
+Os cards têm área de imagem com proporção 4:3, fundo off-white e margens uniformes.
+As fotos são exibidas completas com `object-fit: contain` e centralizadas, sem recortes.
+A prévia de envio e as miniaturas do painel administrativo também foram adaptadas.
+
+**Para atualizar um site que já está publicado:** envie apenas o novo arquivo `style.css`
+para a raiz do repositório e, se desejar, o `admin.html` atualizado (a dica
+de envio foi ajustada). **Não substitua o seu `config.js` preenchido** pelo
+exemplo deste pacote. Nenhuma alteração no banco de dados é necessária.
+
+As imagens originais continuam no Supabase e não precisam ser enviadas novamente.
+Apenas muda a maneira como o navegador as enquadra.

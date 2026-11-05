@@ -5,13 +5,13 @@
   3) Nunca coloque a service_role nem chaves secretas neste arquivo.
 */
 window.WEDDING_CONFIG = {
-  SUPABASE_URL: 'https://tyerbigyeuyxznlcdieo.supabase.co',
-  SUPABASE_PUBLIC_KEY: 'sb_publishable_Dw3UYKC7zmuB9pdieY2kEA_n_OuYg7l',
+  SUPABASE_URL: 'https://SEU-PROJETO.supabase.co',
+  SUPABASE_PUBLIC_KEY: 'SUA_CHAVE_PUBLICAVEL_DO_SUPABASE',
 
   COUPLE_NAMES: 'Lara & Gustavo',
   WELCOME_MESSAGE: 'Para quem deseja nos presentear, preparamos uma seleção especial de presentes e disponibilizamos a opção de contribuir via Pix.',
 
-  PIX_KEY: '43244469892',
-  PIX_RECEIVER_NAME: 'Gustavo Voltarel Deodato da Silva',
-  PIX_RECEIVER_CITY: 'Descalvado'
+  PIX_KEY: 'SUA_CHAVE_PIX',
+  PIX_RECEIVER_NAME: 'NOME DO TITULAR DA CHAVE',
+  PIX_RECEIVER_CITY: 'SAO CARLOS'
 };
