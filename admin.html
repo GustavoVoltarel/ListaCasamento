@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f2eb">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administração | Lara & Gustavo</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="./index.html" aria-label="Voltar à lista pública">
+        <img class="brand-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG">
+        <span class="brand-copy">
+          <span class="brand-overline">Lista de presentes</span>
+          <strong>Lara & Gustavo</strong>
+        </span>
+      </a>
+      <a class="back-link" href="./index.html">← Ver a lista pública</a>
+    </div>
+  </header>
+
+  <main class="admin-main container">
+    <div class="admin-intro invitation-frame invitation-frame-plain admin-intro-card">
+      <img class="hero-floral hero-floral-top" src="./assets/corner-top-right-cut.png" alt="" aria-hidden="true">
+      <img class="hero-floral hero-floral-bottom" src="./assets/corner-bottom-left-cut.png" alt="" aria-hidden="true">
+      <span class="section-kicker">ÁREA PRIVADA DOS NOIVOS</span>
+      <img class="admin-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG">
+      <h1>Gerenciar presentes</h1>
+      <p>Cadastre, edite e organize a lista que seus convidados verão na página pública.</p>
+    </div>
+
+    <section id="setupPanel" class="admin-panel setup-panel" hidden>
+      <h2>Configuração necessária</h2>
+      <p>Antes de usar a área administrativa, preencha a URL e a chave pública do Supabase no arquivo <code>config.js</code> e execute o arquivo <code>supabase.sql</code> no SQL Editor.</p>
+    </section>
+
+    <section id="loginPanel" class="admin-panel login-panel" hidden aria-labelledby="loginTitle">
+      <div class="admin-panel-heading">
+        <img class="admin-panel-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG">
+        <h2 id="loginTitle">Acesso dos noivos</h2>
+        <p>Entre com a conta autorizada no Supabase.</p>
+      </div>
+      <form id="loginForm">
+        <label for="loginEmail" class="field-label">E-mail</label>
+        <input id="loginEmail" type="email" autocomplete="username" required placeholder="seu@email.com">
+        <label for="loginPassword" class="field-label">Senha</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Sua senha">
+        <p id="loginError" class="form-message error-text" role="alert"></p>
+        <button id="loginButton" class="button button-primary button-full" type="submit">Entrar</button>
+      </form>
+    </section>
+
+    <div id="adminContent" hidden>
+      <div class="admin-toolbar">
+        <span class="signed-in">Conectado como <strong id="currentEmail"></strong></span>
+        <button id="logoutButton" class="button button-subtle" type="button">Sair da conta</button>
+      </div>
+
+      <section class="admin-panel" aria-labelledby="formTitle">
+        <div class="panel-topline">
+          <div>
+            <span class="section-kicker">CADASTRO DE PRESENTES</span>
+            <h2 id="formTitle">Adicionar novo presente</h2>
+          </div>
+          <button id="cancelEdit" type="button" class="button button-subtle" hidden>Cancelar edição</button>
+        </div>
+        <form id="giftForm">
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label" for="giftName">Nome do presente *</label>
+              <input type="text" id="giftName" maxlength="120" placeholder="Ex.: Ajuda para a lua de mel" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="giftAmount">Valor do presente (R$) *</label>
+              <input type="number" id="giftAmount" min="0.01" step="0.01" placeholder="Ex.: 200,00" required>
+            </div>
+            <div class="field field-wide">
+              <label class="field-label" for="giftDescription">Descrição (opcional)</label>
+              <textarea id="giftDescription" rows="3" maxlength="500" placeholder="Uma mensagem carinhosa ou divertida para acompanhar o presente..."></textarea>
+            </div>
+            <div class="field field-wide">
+              <label class="field-label" for="giftImage">Imagem do presente <span id="imageRequiredLabel">*</span></label>
+              <input type="file" id="giftImage" accept="image/png,image/jpeg,image/webp" required>
+              <div class="field-hint">JPG, PNG ou WebP, até 5 MB. Dica: imagens horizontais ficam melhores.</div>
+              <div id="imagePreviewWrap" class="image-preview-wrap" hidden>
+                <img id="imagePreview" alt="Prévia da imagem do presente">
+              </div>
+            </div>
+          </div>
+          <label class="toggle-label"><input id="giftActive" type="checkbox" checked> <span>Presente visível na lista pública</span></label>
+          <p id="giftMessage" class="form-message" role="status"></p>
+          <div class="form-actions">
+            <button id="saveGiftButton" class="button button-primary" type="submit">Salvar presente</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="managedHeading">
+        <div class="panel-topline">
+          <div>
+            <span class="section-kicker">SUA LISTA</span>
+            <h2 id="managedHeading">Presentes cadastrados</h2>
+          </div>
+          <span id="adminCount" class="counter">0 presentes</span>
+        </div>
+        <div id="managedList" class="managed-list"><p>Carregando presentes...</p></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>Feito com carinho para o grande dia.</span>
+      <a href="./index.html">Voltar à lista</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+  <script src="./config.js"></script>
+  <script src="./common.js"></script>
+  <script src="./admin.js"></script>
+</body>
+</html>

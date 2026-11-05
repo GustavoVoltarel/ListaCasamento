@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f2eb">
+  <meta name="description" content="Lara e Gustavo celebram o amor. Conheça nossa lista de presentes de casamento e contribua com carinho via Pix.">
+  <title>Lara & Gustavo | Lista de Presentes</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="./index.html" aria-label="Voltar à lista de presentes">
+        <img class="brand-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG">
+        <span class="brand-copy">
+          <span class="brand-overline">Lista de presentes</span>
+          <strong id="headerCoupleNames">Lara & Gustavo</strong>
+        </span>
+      </a>
+      <span class="nav-caption">13.03.2027</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-inner invitation-frame">
+        <img class="hero-floral hero-floral-top" src="./assets/corner-top-right-cut.png" alt="" aria-hidden="true">
+        <img class="hero-floral hero-floral-bottom" src="./assets/corner-bottom-left-cut.png" alt="" aria-hidden="true">
+
+        <span class="eyebrow">Celebrando o amor</span>
+        <img class="hero-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG do casal">
+        <p class="hero-quote">“Entre caminhos, sonhos e tantos capítulos, existem histórias que encontram no tempo a forma mais bonita de permanecer.”</p>
+        <h1 id="coupleNames">Lara & Gustavo</h1>
+        <p id="welcomeMessage" class="hero-message">Para quem deseja nos presentear, preparamos uma seleção especial de presentes e disponibilizamos a opção de contribuir via Pix.</p>
+        <a href="#presentes" class="hero-link">Conheça nossa lista de presentes <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <section class="gifts-section container" id="presentes" aria-labelledby="giftsHeading">
+      <div class="section-title invitation-divider">
+        <div>
+          <span class="section-kicker">UM CARINHO QUE FARÁ PARTE DA NOSSA HISTÓRIA</span>
+          <h2 id="giftsHeading">Nossa lista de presentes</h2>
+          <p>Sua presença em nosso grande dia já é motivo de muita alegria. Se desejar nos presentear, escolha uma das opções abaixo. Cada gesto será recebido com muito carinho.</p>
+        </div>
+        <span id="giftCount" class="counter" aria-live="polite">Carregando...</span>
+      </div>
+
+      <div id="notice" class="notice" hidden role="status"></div>
+      <div id="giftsGrid" class="gifts-grid" aria-live="polite"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        <span class="empty-mark" aria-hidden="true">LG</span>
+        <h3>Estamos preparando nossa lista</h3>
+        <p>Em breve, você poderá conhecer as opções que escolhemos com carinho.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>Com carinho, Lara &amp; Gustavo · 13 de março de 2027</div>
+      <a href="./admin.html">Área dos noivos</a>
+    </div>
+  </footer>
+
+  <dialog id="pixDialog" class="pix-dialog" aria-labelledby="pixTitle">
+    <div class="dialog-content invitation-frame invitation-frame-plain">
+      <button class="close-button" id="closePix" type="button" aria-label="Fechar">×</button>
+      <img class="dialog-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG">
+      <span class="modal-kicker">UM PRESENTE PARA NOSSA HISTÓRIA</span>
+      <h2 id="pixTitle">Presentear com Pix</h2>
+      <p id="pixGiftName" class="pix-gift-name"></p>
+      <div id="pixAmount" class="pix-amount"></div>
+      <div class="qr-wrap"><div id="pixQr" aria-label="QR Code para pagamento com Pix"></div></div>
+      <p class="qr-help">Para nos presentear, escaneie o QR Code ou copie o código abaixo no aplicativo do seu banco.</p>
+      <label class="field-label" for="pixCopyCode">Pix Copia e Cola</label>
+      <textarea id="pixCopyCode" rows="3" readonly></textarea>
+      <button type="button" id="copyPixBtn" class="button button-primary button-full">
+        <span aria-hidden="true">▣</span> Copiar código Pix
+      </button>
+      <p id="pixFeedback" class="pix-feedback" role="status"></p>
+      <p class="security-note">Antes de confirmar no banco, confira o <strong>nome do destinatário e o valor</strong>. O site não verifica o pagamento automaticamente.</p>
+    </div>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="./config.js"></script>
+  <script src="./common.js"></script>
+  <script src="./index.js"></script>
+</body>
+</html>
