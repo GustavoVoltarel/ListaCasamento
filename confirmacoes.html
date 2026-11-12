@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="only light">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f2eb">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Confirmações de presença | Lara & Gustavo</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG">
+        <span class="brand-copy"><span class="brand-overline">Área dos noivos</span><strong>Lara & Gustavo</strong></span>
+      </a>
+      <div class="nav-actions"><span class="nav-caption">13.03.2027</span><a class="nav-rsvp" href="./index.html">Ver o site</a></div>
+    </div>
+  </header>
+  <main class="admin-main container">
+    <div class="admin-intro invitation-frame invitation-frame-plain admin-intro-card">
+      <img class="hero-floral hero-floral-top" src="./assets/corner-top-right-cut.png" alt="" aria-hidden="true">
+      <img class="hero-floral hero-floral-bottom" src="./assets/corner-top-right-cut.png" alt="" aria-hidden="true">
+      <span class="section-kicker">ÁREA PRIVADA DOS NOIVOS</span>
+      <img class="admin-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG">
+      <h1>Confirmações de presença</h1>
+      <p>Confira quem estará com vocês nesse grande dia.</p>
+    </div>
+
+    <section id="setupPanel" class="admin-panel setup-panel" hidden>
+      <h2>Configuração necessária</h2>
+      <p>Configure o Supabase em <code>config.js</code> e execute <code>supabase-rsvp.sql</code> para começar.</p>
+    </section>
+
+    <section id="loginPanel" class="admin-panel login-panel" hidden aria-labelledby="loginTitle">
+      <div class="admin-panel-heading">
+        <img class="admin-panel-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG">
+        <h2 id="loginTitle">Acesso dos noivos</h2>
+        <p>Entre com seu usuário administrador para consultar a lista de convidados.</p>
+      </div>
+      <form id="loginForm">
+        <label class="field-label" for="loginEmail">E-mail</label>
+        <input type="email" id="loginEmail" autocomplete="username" placeholder="seu@email.com" required>
+        <label class="field-label" for="loginPassword">Senha</label>
+        <input type="password" id="loginPassword" autocomplete="current-password" placeholder="Sua senha" required>
+        <p id="loginError" class="form-message error-text" role="alert"></p>
+        <button class="button button-primary button-full" id="loginButton" type="submit">Entrar</button>
+      </form>
+    </section>
+
+    <div id="adminContent" hidden>
+      <nav class="admin-tabs" aria-label="Painéis administrativos">
+        <a class="admin-tab" href="./admin.html">Presentes</a>
+        <a class="admin-tab active" href="./confirmacoes.html" aria-current="page">Confirmações de presença</a>
+      </nav>
+      <div class="admin-toolbar">
+        <span class="signed-in">Conectado como <strong id="currentEmail"></strong></span>
+        <button id="logoutButton" class="button button-subtle" type="button">Sair da conta</button>
+      </div>
+      <section class="rsvp-stats" aria-label="Resumo de confirmações">
+        <div class="rsvp-stat"><strong id="totalGroups">0</strong><span>Confirmações recebidas</span></div>
+        <div class="rsvp-stat"><strong id="totalPeople">0</strong><span>Pessoas confirmadas</span></div>
+      </section>
+      <section class="admin-panel" aria-labelledby="listTitle">
+        <div class="panel-topline">
+          <div><span class="section-kicker">CONFIRMAÇÕES RECEBIDAS</span><h2 id="listTitle">Lista de convidados</h2></div>
+          <span id="lastRefresh" class="counter">Carregando...</span>
+        </div>
+        <div class="confirm-actions">
+          <input class="search-input" id="rsvpSearch" type="search" placeholder="Buscar convidado pelo nome" aria-label="Buscar convidado pelo nome">
+          <button type="button" id="refreshButton" class="button button-outline">Atualizar</button>
+          <button type="button" id="exportXlsxButton" class="button button-primary">Baixar Excel (.xlsx)</button>
+          <button type="button" id="exportCsvButton" class="button button-subtle">Baixar CSV</button>
+        </div>
+        <p class="rsvp-small" style="margin-top:0;margin-bottom:12px">As confirmações são registradas no horário de Brasília. Os arquivos Excel e CSV incluem apenas o nome e a data da confirmação.</p>
+        <p id="listMessage" class="form-message" role="status"></p>
+        <div id="rsvpList" class="rsvp-list"><p class="rsvp-empty">Carregando confirmações...</p></div>
+      </section>
+    </div>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span>Com carinho, Lara &amp; Gustavo</span><a href="./presenca.html">Ver formulário público</a></div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+  <script src="./config.js"></script>
+  <script src="./common.js"></script>
+  <script src="./confirmacoes.js"></script>
+</body>
+</html>

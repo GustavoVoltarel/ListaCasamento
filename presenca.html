@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="only light">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f2eb">
+  <meta name="description" content="Confirme a presença no casamento de Lara e Gustavo.">
+  <title>Confirmar presença | Lara & Gustavo</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" src="./assets/monograma-lg-cut.png" alt="Monograma LG">
+        <span class="brand-copy"><span class="brand-overline">Nosso casamento</span><strong>Lara & Gustavo</strong></span>
+      </a>
+      <div class="nav-actions"><span class="nav-caption">13.03.2027</span><a class="nav-rsvp" href="./index.html">Ver presentes</a></div>
+    </div>
+  </header>
+  <main class="rsvp-main container">
+    <div class="rsvp-intro">
+      <img class="hero-floral hero-floral-top" src="./assets/corner-top-right-cut.png" alt="" aria-hidden="true">
+      <img class="hero-floral hero-floral-bottom" src="./assets/corner-top-right-cut.png" alt="" aria-hidden="true">
+      <span class="section-kicker">LARA & GUSTAVO · 13 DE MARÇO DE 2027</span>
+      <img class="rsvp-monogram" src="./assets/monograma-lg-cut.png" alt="Monograma do casal">
+      <h1>Confirme sua presença</h1>
+      <p>Estaremos muito felizes em celebrar esse dia com você! Por favor, informe seu nome e, se houver, os nomes das pessoas que irão acompanhar você.</p>
+      <span class="rsvp-deadline">Confirmações até 20/02/2027</span>
+    </div>
+
+    <section class="admin-panel rsvp-panel" aria-labelledby="rsvpFormTitle">
+      <span class="section-kicker">ESTAREMOS ESPERANDO POR VOCÊ</span>
+      <h2 id="rsvpFormTitle">Seus dados</h2>
+      <p class="rsvp-explainer">Preencha o nome completo de cada pessoa que participará. Você pode adicionar até 10 acompanhantes nesta confirmação.</p>
+      <div id="rsvpSetup" class="notice" hidden>É necessário configurar o Supabase em <code>config.js</code> e executar <code>supabase-rsvp.sql</code> para habilitar as confirmações.</div>
+      <form id="rsvpForm" autocomplete="on">
+        <div class="rsvp-guest">
+          <div class="field">
+            <label class="field-label" for="primaryGuest">Seu nome completo *</label>
+            <input type="text" id="primaryGuest" name="guest_name" autocomplete="name" maxlength="120" minlength="2" placeholder="Digite seu nome e sobrenome" required>
+          </div>
+        </div>
+        <div id="additionalGuests" aria-live="polite"></div>
+        <button id="addGuestButton" type="button" class="button button-outline rsvp-add">+ Adicionar outro convidado</button>
+        <p id="guestCountLabel" class="rsvp-small">1 pessoa nesta confirmação.</p>
+        <div class="rsvp-honeypot" aria-hidden="true">
+          <label for="websiteAddress">Não preencha este campo</label>
+          <input id="websiteAddress" type="text" autocomplete="off" tabindex="-1">
+        </div>
+        <div class="rsvp-actions"><button id="submitRsvp" class="button button-primary" type="submit">Confirmar presença</button></div>
+        <p class="rsvp-privacy">Os nomes informados serão usados somente para organizar a presença no casamento e poderão ser consultados pelos noivos.</p>
+        <p id="rsvpFeedback" class="rsvp-feedback" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span>Com carinho, Lara &amp; Gustavo · 13 de março de 2027</span><a href="./index.html">Voltar ao início</a></div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+  <script src="./config.js"></script>
+  <script src="./common.js"></script>
+  <script src="./presenca.js"></script>
+</body>
+</html>
