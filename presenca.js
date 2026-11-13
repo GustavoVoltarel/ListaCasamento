@@ -7,10 +7,37 @@
   const submit = document.getElementById('submitRsvp');
   const feedback = document.getElementById('rsvpFeedback');
   const countLabel = document.getElementById('guestCountLabel');
+  const closedNotice = document.getElementById('rsvpClosed');
   const maxAdditional = 10;
   let db = null;
   let nextIndex = 0;
   let finished = false;
+  let closed = false;
+
+  // Prazo inclusivo: 20/02/2027 é o último dia válido, em Brasília.
+  // A hora do celular afeta somente a interface. O Supabase aplica o bloqueio real.
+  function deadlineReached() {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Sao_Paulo',
+      year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(new Date());
+    const value = Object.fromEntries(parts.map(part => [part.type, part.value]));
+    const dateBR = `${value.year}-${value.month}-${value.day}`;
+    return dateBR >= '2027-02-21';
+  }
+
+  function updateDeadlineState() {
+    if (!closed && deadlineReached()) {
+      closed = true;
+      form.hidden = true;
+      closedNotice.hidden = false;
+      submit.disabled = true;
+      addButton.disabled = true;
+      document.getElementById('rsvpFormTitle').textContent = 'Confirmações encerradas';
+      document.querySelector('.rsvp-explainer').hidden = true;
+    }
+    return closed;
+  }
 
   function setFeedback(message, error = false) {
     feedback.textContent = message;
@@ -25,11 +52,11 @@
   function updateControls() {
     const n = totalGuests();
     countLabel.textContent = `${n} ${n === 1 ? 'pessoa' : 'pessoas'} nesta confirmação.`;
-    addButton.disabled = n >= maxAdditional + 1 || finished;
+    addButton.disabled = n >= maxAdditional + 1 || finished || closed;
   }
 
   function addGuest() {
-    if (totalGuests() >= maxAdditional + 1) return;
+    if (updateDeadlineState() || totalGuests() >= maxAdditional + 1) return;
     const index = ++nextIndex;
     const wrapper = document.createElement('div');
     wrapper.className = 'rsvp-guest';
@@ -68,7 +95,7 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (finished || !db) return;
+    if (updateDeadlineState() || finished || !db) return;
     const name = document.getElementById('primaryGuest').value.trim().replace(/\s+/g, ' ');
     const extras = [...extraList.querySelectorAll('input[data-guest]')]
       .map(el => el.value.trim().replace(/\s+/g, ' '));
@@ -104,9 +131,17 @@
       setFeedback(`Presença confirmada com sucesso para ${n} ${n === 1 ? 'pessoa' : 'pessoas'}! Agradecemos o carinho e esperamos vocês em 13 de março de 2027.`);
     } catch (error) {
       console.error('Erro ao confirmar:', error);
-      setFeedback('Não foi possível salvar sua confirmação. Verifique a conexão e tente novamente. Se o erro persistir, confira se o SQL de confirmação foi executado.', true);
-      submit.disabled = false;
-      addButton.disabled = false;
+      if (updateDeadlineState() || /prazo de confirma[cç][aã]o encerrado/i.test(error.message || '')) {
+        closed = true;
+        form.hidden = true;
+        closedNotice.hidden = false;
+        document.getElementById('rsvpFormTitle').textContent = 'Confirmações encerradas';
+        document.querySelector('.rsvp-explainer').hidden = true;
+      } else {
+        setFeedback('Não foi possível salvar sua confirmação. Verifique a conexão e tente novamente. Se o erro persistir, confira se o SQL de confirmação foi executado.', true);
+        submit.disabled = false;
+        addButton.disabled = false;
+      }
     } finally {
       submit.textContent = 'Confirmar presença';
       updateControls();
@@ -125,5 +160,12 @@
     submit.disabled = true;
     console.error(error);
   }
+  updateDeadlineState();
   updateControls();
+  // Atualiza até mesmo quando alguém deixa a aba aberta durante a virada do dia.
+  const deadlineTimer = window.setInterval(() => {
+    if (updateDeadlineState()) window.clearInterval(deadlineTimer);
+  }, 60_000);
+  window.addEventListener('focus', updateDeadlineState);
+  document.addEventListener('visibilitychange', updateDeadlineState);
 })();

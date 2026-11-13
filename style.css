@@ -917,3 +917,17 @@ input, textarea, select, button, dialog {
   .rsvp-intro .hero-floral-top { width: 95px; top: 8px; right: 9px; }
   .rsvp-intro .hero-floral-bottom { width: 105px; bottom: 8px; left: 9px; }
 }
+
+/* Confirmação de presença: aviso após 20/02/2027 */
+.rsvp-closed {
+  margin-top: 15px;
+  padding: 28px 24px;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #f9f5ed;
+  color: var(--heading);
+}
+.rsvp-closed strong { display: block; font-size: 17px; line-height: 1.6; }
+.rsvp-closed p { max-width: 540px; margin: 10px auto 20px; font-size: 13px; line-height: 1.8; color: var(--muted); }
+.rsvp-closed[hidden], #rsvpForm[hidden] { display: none !important; }
