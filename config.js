@@ -11,7 +11,7 @@ window.WEDDING_CONFIG = {
   COUPLE_NAMES: 'Lara & Gustavo',
   WELCOME_MESSAGE: 'Para quem deseja nos presentear, preparamos uma seleção especial de presentes e disponibilizamos a opção de contribuir via Pix.',
 
-  PIX_KEY: '43244469892',
-  PIX_RECEIVER_NAME: 'Gustavo Voltarel Deodato da Silva',
+  PIX_KEY: 'laraegustavo1303@gmail.com',
+  PIX_RECEIVER_NAME: 'Lara Scherma',
   PIX_RECEIVER_CITY: 'Descalvado'
 };
